@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 
 class PostsController extends Controller
@@ -28,14 +29,18 @@ class PostsController extends Controller
 
     public function store(CreatePostRequest $request)
     {
-        $post = Post::create($request->all());
+
+        $data = $request->only(['title', 'body', 'userId']);
+        $data['title'] = trim($data['title']);
+        $post = Post::create($data);
         return $post;
     }
 
-    public function update(Request $request, $post)
+    public function update(UpdatePostRequest $request, $post)
     {
+        $data = $request->only(['title', 'body']);
         $post = Post::find($post);
-        $post->update($request->all());
+        $post->update($data);
         return $post;
     }
 

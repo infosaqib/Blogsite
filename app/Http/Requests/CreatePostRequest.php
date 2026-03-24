@@ -29,6 +29,7 @@ class CreatePostRequest extends FormRequest
             'title' => 'required|string|min:3',
             'body' => 'required|string|min:3',
             'userId' => [
+                'required',
                 function ($attr, $value, $fail) {
                     if (!is_int($value)) {
                         $fail('The userId must be an integer.');
