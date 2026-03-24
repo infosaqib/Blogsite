@@ -12,50 +12,37 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
+        return view('posts', ['data' => $posts]);
+    }
+    public function show($post)
+    {
+        $posts = Post::find($post);
         return $posts;
     }
-    public function show($val)
-    {
-        $response = Http::get("https://dummyjson.com/posts/$val");
-        return $response->json();
-    }
 
-    public function searchPosts($val)
+    public function searchPosts()
     {
-        $response = Http::get("https://dummyjson.com/posts/search?q=$val");
-        return $response->json();
+        $post = Post::where('id', 1)->get();
+        return $post;
     }
 
     public function store(CreatePostRequest $request)
     {
-        $response = Http::post('https://dummyjson.com/posts/add', [
-            'title' => $request->input('title'),
-            'userId' => $request->input('userId'),
-        ]);
-        return $response->json();
+        $post = Post::create($request->all());
+        return $post;
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $post)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|min:1',
-            'userId' => [
-                'required',
-                function ($attr, $value, $fail) {
-                    if (!is_int($value)) {
-                        $fail('userId must be an integer');
-                    }
-                }
-            ]
-        ]);
-
-        $response = Http::put('https://dummyjson.com/posts/1', $validated);
-        return $response->json();
+        $post = Post::find($post);
+        $post->update($request->all());
+        return $post;
     }
 
-    public function destroy()
+    public function destroy($post)
     {
-        $response = Http::delete('https://dummyjson.com/posts/1');
-        return $response->json();
+        $post = Post::find($post);
+        $post->delete();
+        return response()->json(['message' => 'Post deleted successfully', $post]);
     }
 }

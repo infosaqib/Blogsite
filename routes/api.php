@@ -13,6 +13,6 @@ Route::get('/', function () {
 
 Route::resource('users', UsersController::class);
 
-Route::resource('posts', PostsController::class);
 //Search Posts - Required
-Route::get('/posts/search/{val?}', [PostsController::class, 'searchPosts']);
+Route::get('/posts/search/', [PostsController::class, 'searchPosts']);
+Route::resource('posts', PostsController::class);
