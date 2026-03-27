@@ -1,8 +1,12 @@
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import Alpine from 'alpinejs';
 import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import '../css/app.css';
+
+window.Alpine = Alpine;
+Alpine.start();
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
