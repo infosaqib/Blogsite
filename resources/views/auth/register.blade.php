@@ -117,9 +117,13 @@
         display: inline-block;
         margin-left: 5px;
     }
-    span{
+
+    span, .input-error{
         color: red;
         font-size: 1em;
+    }
+    .input-error{
+        border: 2px solid red;
     }
 </style>
 
@@ -127,72 +131,72 @@
     <h1>STUDENT REGISTRATION FORM</h1>
     <div id="form">
         @if($errors->any())
-        @foreach ($errors->all() as $error)
-        <p>{{ $error }}</p>
-        @endforeach
+            @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
         @endif
         <form method="post" action="adduser">
             <div class="form-row">
                 <div class="form-label">NAME:</div>
                 <div class="form-field">
-                    <input type="text" name="name" maxlength="30" placeholder="Enter name" />
+                    <input type="text" name="name" maxlength="30" placeholder="Enter name" value="{{ old('name') }} " class="{{ $errors->first('name') ? 'input-error' : '' }}"/>
                 </div>
                 @error('name')
-                    <span>{{ $message }}</span>
+                    <br><span>{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-row">
                 <div class="form-label">EMAIL ID:</div>
                 <div class="form-field">
-                    <input type="text" name="email" placeholder="Enter email" />
+                    <input type="text" name="email" placeholder="Enter email" value="{{ old('email') }}" class="{{ $errors->first('email') ? 'input-error' : '' }}"/>
                 </div>
                 @error('email')
-                <span>{{ $message }}</span>
+                    <br><span>{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-row">
                 <div class="form-label">GENDER:</div>
                 <div class="form-field inline-group">
-                    <input id="female" type="radio" name="gender" value="f"><label for="female">Female</label>
-                    <input id="male" type="radio" name="gender" value="m"><label for="male">Male</label>
+                    <input id="female" type="radio" name="gender" value="f" {{old('gender') == 'f' ? 'checked' : ''}}><label for="female">Female</label>
+                    <input id="male" type="radio" name="gender" value="m" {{old('gender') == 'm' ? 'checked' : ''}}><label for="male">Male</label>
                     @error('gender')
-                        <span>{{ $message }}</span>
+                        <br><span>{{ $message }}</span>
                     @enderror
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-label">COUNTRY:</div>
                 <div class="form-field">
-                    <select name="country">
-                        <option value="#">select your country</option>
-                        <option value="Pakistan">Pakistan</option>
-                        <option value="India">India</option>
-                        <option value="USA">USA</option>
-                        <option value="UAE">UAE</option>
-                        <option value="Iraq">Iraq</option>
-                        <option value="Japan">Japan</option>
-                        <option value="UK">UK</option>
-                        <option value="China">China</option>
+                    <select name="country" class="{{ $errors->first('country') ? 'input-error' : '' }}">
+                        <option value="" disabled {{ old('country') ? '' : 'selected' }}>select your country</option>
+                        <option {{ old('country') == 'Pakistan' ? 'selected' : '' }} value="Pakistan">Pakistan</option>
+                        <option {{ old('country') == 'India' ? 'selected' : '' }} value="India">India</option>
+                        <option {{ old('country') == 'USA' ? 'selected' : '' }} value="USA">USA</option>
+                        <option {{ old('country') == 'UAE' ? 'selected' : '' }} value="UAE">UAE</option>
+                        <option {{ old('country') == 'Iraq' ? 'selected' : '' }} value="Iraq">Iraq</option>
+                        <option {{ old('country') == 'Japan' ? 'selected' : '' }} value="Japan">Japan</option>
+                        <option {{ old('country') == 'UK' ? 'selected' : '' }} value="UK">UK</option>
+                        <option {{ old('country') == 'China' ? 'selected' : '' }} value="China">China</option>
                     </select>
                 </div>
                 @error('country')
-                    <span>{{ $message }}</span>
+                    <br><span>{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-row">
                 <div class="form-label">HOBBIES:</div>
                 <div class="form-field hobbies">
-                    <input type="checkbox" name="hobbies[]" value="Singing" id="singing">
+                    <input type="checkbox" name="hobbies[]" value="Singing" {{ in_array('Singing', old('hobbies', [])) ? 'checked' : '' }} id="singing">
                     <label for="singing">Singing</label>
-                    <input type="checkbox" name="hobbies[]" value="Dancing" id="dancing">
+                    <input type="checkbox" name="hobbies[]" value="Dancing" {{ in_array('Dancing', old('hobbies', [])) ? 'checked' : '' }} id="dancing">
                     <label for="dancing">Dancing</label>
-                    <input type="checkbox" name="hobbies[]" value="Drawing" id="drawing">
+                    <input type="checkbox" name="hobbies[]" value="Drawing" {{ in_array('Drawing', old('hobbies', [])) ? 'checked' : '' }} id="drawing">
                     <label for="drawing">Drawing</label>
-                    <input type="checkbox" name="hobbies[]" value="Sketching" id="sketching">
+                    <input type="checkbox" name="hobbies[]" value="Sketching" {{ in_array('Sketching', old('hobbies', [])) ? 'checked' : '' }} id="sketching">
                     <label for="sketching">Sketching</label>
                 </div>
                 @error('hobbies')
-                    <span>{{ $message }}</span>
+                    <br><span>{{ $message }}</span>
                 @enderror
             </div>
             <div style="text-align:center; margin-top:10px;">

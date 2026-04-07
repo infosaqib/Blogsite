@@ -41,6 +41,9 @@ class UserController extends Controller
             'gender' => 'required',
             'country' => 'required',
             'hobbies' => 'required',
+        ],[
+            'name.required'=>'The name field can not be empty',
+            'name.min'=>'The name field should not less than 3 characters'
         ]);
         return $request;
     }
