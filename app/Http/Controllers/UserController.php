@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\Uppercase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -36,7 +37,7 @@ class UserController extends Controller
     public function addUser(Request $request)
     {
         $request->validate([
-            'name' => 'required | min:3 | max:6',
+            'name' => ['required' , 'min:3' , 'max:6', new Uppercase()],
             'email' => 'required | email',
             'gender' => 'required',
             'country' => 'required',
