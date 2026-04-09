@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,3 +25,9 @@ Route::post('loginuser', [UserController::class, 'loginUser']);
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/register', [UserController::class, 'register'])->name('register');
+
+Route::prefix('product')->group(function () {
+    Route::get('/index', [ProductController::class, 'index']);
+    Route::get('/show', [ProductController::class, 'show']);
+    Route::get('/store', [ProductController::class, 'store']);
+});
