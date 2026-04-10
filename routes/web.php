@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Middleware\CountryCheck;
+use App\Http\Middleware\RequestLogger;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,11 +14,11 @@ Route::redirect('/welcome', '/');
 
 // Route::view('/home', 'home');
 Route::view('/about', 'about')->name('about');
-Route::view('/contact', 'contact')->name('contact');
+Route::view('/contact', 'contact')->name('contact')->middleware([CountryCheck::class, RequestLogger::class]);
 
 Route::get('/home/{name?}', function ($name = null) {
     return view('home', ['name' => $name]);
-})->name('home');
+})->name('home')->middleware(CountryCheck::class);
 
 //Route group with controller
 Route::controller(UserController::class)
