@@ -38,7 +38,7 @@ Route::controller(UserController::class)
 //Route group with prefix
 Route::prefix('product')->group(function () {
     Route::get('/index', [ProductController::class, 'index'])->middleware('guard');;
-    Route::get('/show', [ProductController::class, 'show']);
+    Route::get('/{id}', [ProductController::class, 'show']);
     Route::get('/store', [ProductController::class, 'store']);
 });
 

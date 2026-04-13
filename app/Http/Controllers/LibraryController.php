@@ -15,4 +15,8 @@ class LibraryController extends Controller
         $library = Library::all();
         return view('library', ['library' => $library]);
     }
+    public function show(){
+
+    }
+
 }

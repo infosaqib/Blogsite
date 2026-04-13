@@ -6,13 +6,15 @@
             <th>Author</th>
             <th>Price</th>
         </tr>
-        @foreach($library as $book )
-        <tr>
-            <td>{{$book->id}}</td>
-            <td>{{$book->title}}</td>
-            <td>{{$book->author}}</td>
-            <td>{{$book->price}}</td>
-        </tr>
-        @endforeach
+        @isset($library)
+            @foreach($library as $book)
+                <tr>
+                    <td>{{$book->id}}</td>
+                    <td>{{$book->title}}</td>
+                    <td>{{$book->author}}</td>
+                    <td>{{$book->price}}</td>
+                </tr>
+            @endforeach
+        @endisset
     </table>
 </div>
