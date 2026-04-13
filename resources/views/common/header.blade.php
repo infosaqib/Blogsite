@@ -7,7 +7,7 @@
     <title>{{ $page }}</title>
 </head>
 
-<body>
+<body style="background-color: brown;">
     <header style="color:#fff; font-family:ui-sans-serif,system-ui;">
         <div
             style="max-width:1200px;margin:0 auto;display:flex;padding:20px;flex-direction:row;align-items:center;justify-content:center;background-color:limegreen">
@@ -24,6 +24,8 @@
                 <a href="{{ route('contact') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Contact</a>
                 <a href="{{ route('login') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Login</a>
                 <a href="{{ route('register') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Register</a>
+                <a href="{{ route('product') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Product</a>
+                <a href="{{ route('library') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Library</a>
             </nav>
 
             <button

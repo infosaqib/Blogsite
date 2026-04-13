@@ -1,3 +1,4 @@
+@includeif('common.header', ['page' => 'Library'])
 <div>
     <table border="true">
         <tr>
