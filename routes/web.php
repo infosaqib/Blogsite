@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\PostController;
 use App\Http\Middleware\CountryCheck;
 use App\Http\Middleware\RequestLogger;
 
@@ -56,3 +57,8 @@ Route::prefix('/library')->group(function () {
     Route::get('/update', [LibraryController::class, 'update']);
     Route::get('/destroy', [LibraryController::class, 'destroy']);
 });
+
+//Posts routes
+Route::view('posts', 'posts')->name('posts');
+Route::any('any', [PostController::class, 'any'])->name('any');
+Route::match(['get', 'post'], 'match', [PostController::class, 'match'])->name('match');
