@@ -26,6 +26,7 @@
                 <a href="{{ route('register') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Register</a>
                 <a href="{{ route('product') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Product</a>
                 <a href="{{ route('library') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Library</a>
+                <a href="{{ route('posts') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Posts</a>
             </nav
 
         </div>
