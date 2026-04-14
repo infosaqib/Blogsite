@@ -1,13 +1,30 @@
 @includeif('common.header', ['page' => 'Users'])
 <h3>User id: {{ rand() }}</h3>
-@if($name === 'joe')
-    <h1>User is {{ $name }}</h1>
-@elseif($name === 'osama')
-    <h1>User is osama</h1>
-@else
-    <h1>other user</h1>
-@endif
+<!-- <p>{{ print_r($users) }}</p> -->
 
-@foreach($users as $user)
-    <h2>{{ $user  }}</h2>
-@endforeach
+<table border="true">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Country</th>
+        <th>Action</th>
+    </tr>
+    @isset($users)
+        @foreach($users as $user)
+            <tr>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->country }}</td>
+                <td>
+                    <form action="/users/{{ $user->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button style="background-color: red;color:white;">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    @endisset
+</table>

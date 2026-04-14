@@ -7,7 +7,7 @@
     <title>{{ $page }}</title>
 </head>
 
-<body>
+<body style="background-color: brown;">
     <header style="color:#fff; font-family:ui-sans-serif,system-ui;">
         <div
             style="max-width:1200px;margin:0 auto;display:flex;padding:20px;flex-direction:row;align-items:center;justify-content:center;background-color:limegreen">
@@ -24,16 +24,9 @@
                 <a href="{{ route('contact') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Contact</a>
                 <a href="{{ route('login') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Login</a>
                 <a href="{{ route('register') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Register</a>
-            </nav>
-
-            <button
-                style="display:inline-flex;align-items:center;background-color:#F3F4F6;border:none;padding:4px 12px;border-radius:6px;font-size:16px;margin-top:16px;cursor:pointer;">
-                Button
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    viewBox="0 0 24 24" style="width:16px;height:16px;margin-left:4px;">
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-            </button>
+                <a href="{{ route('product') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Product</a>
+                <a href="{{ route('library') }}" style="margin-right:20px;color:#fff;text-decoration:none;">Library</a>
+            </nav
 
         </div>
     </header>
