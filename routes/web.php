@@ -31,7 +31,7 @@ Route::controller(UserController::class)
         Route::post('loginuser', 'loginUser');
         Route::put('updateuser', 'updateUser');
         Route::delete('users/{id}', 'deleteUser');
-        
+
         Route::get('/users', 'index');
         Route::get('/users/verified', 'getVerifiedUsers');
         Route::get('/users/first', 'getFirstUser');
@@ -43,11 +43,16 @@ Route::controller(UserController::class)
 
 //Route group with prefix
 Route::prefix('product')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name('product')
-    ;
+    Route::get('/', [ProductController::class, 'index'])->name('product');
     Route::get('/{id}', [ProductController::class, 'show']);
     Route::get('/store', [ProductController::class, 'store']);
 });
 
 //Library routes
-Route::get('/library', [LibraryController::class, 'index'])->name('library');
+Route::prefix('/library')->group(function () {
+    Route::get('/', [LibraryController::class, 'index'])->name('library');
+    Route::get('/show', [LibraryController::class, 'show']);
+    Route::get('/store', [LibraryController::class, 'store']);
+    Route::get('/update', [LibraryController::class, 'update']);
+    Route::get('/destroy', [LibraryController::class, 'destroy']);
+});
