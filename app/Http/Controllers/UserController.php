@@ -85,7 +85,13 @@ class UserController extends Controller
 
     public function loginUser(Request $request)
     {
-        return $request;
+        $request->session()->put('user', $request->input('email'));
+        return redirect('user');
+    }
+    public function logoutUser(Request $request)
+    {
+        $request->session()->pull('user');
+        return redirect('login');
     }
     public function addUser(Request $request)
     {
@@ -107,8 +113,11 @@ class UserController extends Controller
             'hobbies' => json_encode($request->hobbies)
         ]);
 
+        $request->session()->flash('message', 'User has been registered successfully');
+        $request->session()->put('user', $request->name);
+
         if ($result) {
-            echo 'Data inserted successfully';
+            return redirect('register');
         } else {
             echo 'Data could not inserted';
         }

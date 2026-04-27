@@ -28,8 +28,9 @@ Route::controller(UserController::class)
 // ->middleware('guard')
     ->group(function () {
         Route::get('/user', 'getUser')->name('user');
-        Route::post('adduser', 'addUser')->withoutMiddleware('guard');
+        Route::post('register', 'addUser')->withoutMiddleware('guard');
         Route::post('loginuser', 'loginUser');
+        Route::get('logout', 'logoutUser');
         Route::put('updateuser', 'updateUser');
         Route::delete('users/{id}', 'deleteUser');
 
