@@ -19,7 +19,7 @@ class PostController extends Controller
     }
     public function getAllPosts()
     {
-      return Post::select('title', 'description')->get(); //Objects
+      return Post::with('user')->select('title', 'description', 'user_id')->get(); //Objects
         // return Post::pluck('title'); // Array of titles
     }
     public function orderedPosts()
@@ -48,9 +48,10 @@ class PostController extends Controller
     public function createPost()
     {
         return Post::create([
-            'title' => 'Rose',
-            'description' => 'King of flowers',
-            'image' => 'https://unsplash.com/?search=rose'
+            'user_id' => 2,
+            'title' => 'Black Diamond',
+            'description' => 'Shinny Star on Earth',
+            'image' => 'https://unsplash.com/?search=diamond'
         ]);
     }
     public function updatePosts()

@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Post extends Model
 {
     protected $guarded = ['image'];
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['user_id','title', 'description', 'image'];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
