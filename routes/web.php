@@ -60,6 +60,14 @@ Route::prefix('/library')->group(function () {
 });
 
 //Posts routes
-Route::view('posts', 'posts')->name('posts');
+Route::get('posts', [PostController::class, 'getAllPosts'])->name('posts');
+Route::get('posts/first', [PostController::class, 'getFirstPost']);
+Route::get('posts/search', [PostController::class, 'searchPosts']);
+Route::get('posts/create', [PostController::class, 'createPost']);
+Route::get('posts/update', [PostController::class, 'updatePosts']);
+Route::get('posts/delete', [PostController::class, 'deletePosts']);
+Route::get('posts/order', [PostController::class, 'orderedPosts']);
+Route::get('posts/limit/{limit}', [PostController::class, 'LimitedPosts']);
+Route::get('posts/{id}', [PostController::class, 'getPostById']);
 Route::any('any', [PostController::class, 'any'])->name('any');
 Route::match(['get', 'post'], 'match', [PostController::class, 'match'])->name('match');
