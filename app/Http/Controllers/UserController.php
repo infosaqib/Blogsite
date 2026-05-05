@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::with('posts')->get();
+        $users = User::with('posts', 'library')->get();
         return $users;
     }
     public function getVerifiedUsers()
