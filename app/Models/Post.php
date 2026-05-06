@@ -16,4 +16,13 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    //Acessors (Getters) & Mutators (Setters)
+    protected function title(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => strtoupper($value),
+            set: fn($value) => strtolower($value)
+        );
+    }
 }
