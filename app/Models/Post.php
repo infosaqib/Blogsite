@@ -11,6 +11,10 @@ class Post extends Model
 {
     protected $guarded = ['image'];
     protected $fillable = ['user_id', 'title', 'description', 'image'];
+    protected $casts = [
+        //work as setters and getters both
+        'created_at'=> 'datetime'
+    ];
 
     public function user(): BelongsTo
     {
