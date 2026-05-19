@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Jobs\SendWelcomeEmail;
 
 class UserController extends Controller
 {
@@ -106,7 +107,7 @@ class UserController extends Controller
             'name.required' => 'The name field can not be empty',
             'name.min' => 'The name field should not less than 3 characters'
         ]);
-        $result = DB::table('users')->insert([
+        $user = DB::table('users')->insert([
             'name' => $request->name,
             'email' => $request->email,
             'gender' => $request->gender,
@@ -117,7 +118,9 @@ class UserController extends Controller
         $request->session()->flash('message', 'User has been registered successfully');
         $request->session()->put('user', $request->name);
 
-        if ($result) {
+        SendWelcomeEmail::dispatch($user);
+
+        if ($user) {
             return redirect('register');
         } else {
             echo 'Data could not inserted';
